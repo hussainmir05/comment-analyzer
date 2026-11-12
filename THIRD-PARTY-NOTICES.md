@@ -1,6 +1,6 @@
 # Third-party notices
 
-Comment Analyzer is built on the following software and models. Each keeps its own licence.
+Comment Analyzer itself is free software under the GNU General Public License, version 3 or later (see [LICENSE](LICENSE)). It is built on the following software and models, and each keeps its own licence. All of them are compatible with the GPL.
 
 ## Bundled with the app
 

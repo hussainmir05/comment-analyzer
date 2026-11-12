@@ -66,7 +66,8 @@ try {
         Invoke-Native "Inno Setup" {
             & $iscc /Q "/DAppVersion=$version" "/DSourceDir=$root\dist\Comment Analyzer" `
                 "/DOutputDir=$root\dist" "/DIconFile=$root\build\icon.ico" `
-                "/DNoticesFile=$root\THIRD-PARTY-NOTICES.md" "scripts\installer.iss"
+                "/DNoticesFile=$root\THIRD-PARTY-NOTICES.md" "/DLicenseFile=$root\LICENSE" `
+                "scripts\installer.iss"
         }
         Write-Host "Installer: $root\dist\Comment-Analyzer-$version-Setup.exe"
     }

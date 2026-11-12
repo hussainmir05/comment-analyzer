@@ -4,6 +4,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]: 2.0.0, the rewrite
 
+### Release 2.0.0-beta.1
+
+- **Licence:** the code is now under the GNU GPL, version 3 or later (`LICENSE`). The installer includes the licence text.
+- **Version:** `2.0.0b1`. It's a beta because the Facebook, Instagram and TikTok collectors and Meta publishing haven't run against the real sites yet.
+- **Release workflow:** tags with a hyphen, such as `v2.0.0-beta.1`, are published as pre-releases.
+
 ### Completing the plan
 
 #### Added

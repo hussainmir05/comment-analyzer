@@ -114,3 +114,7 @@ To check the sentiment model against your own labels: `python -m comment_analyze
 - **Comment text:** deleted after 30 days by default. Counts and results are kept.
 - **Exports, images and captions:** never include commenters' names or photos.
 - **Network:** nothing leaves your computer except requests to the platforms themselves. The optional Claude mode is the one exception: it sends comment text without usernames, and only after you confirm the estimated cost.
+
+## Licence
+
+Comment Analyzer is free software: you can redistribute it and modify it under the terms of the [GNU General Public License](LICENSE), version 3 or (at your option) any later version. It comes with no warranty. The software and models it builds on keep their own licences; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

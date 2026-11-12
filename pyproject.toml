@@ -7,6 +7,8 @@ name = "comment-analyzer"
 dynamic = ["version"]
 description = "Windows desktop app: paste a link to a YouTube, Facebook, Instagram or TikTok post and analyse its comments."
 readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 requires-python = ">=3.14,<3.15"
 dependencies = [
     "PySide6-WebEngine>=6.12",  # also installs PySide6-Addons and PySide6-Essentials
