@@ -1,0 +1,7 @@
+{
+  "kind": "youtube#commentListResponse",
+  "items": [
+    {"kind": "youtube#comment", "id": "Ugw_T2.r6", "snippet": {"textDisplay": "reply 6", "authorChannelId": {"value": "UCuser3"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:06:00Z"}},
+    {"kind": "youtube#comment", "id": "Ugw_T2.r7", "snippet": {"textDisplay": "reply 7", "authorChannelId": {"value": "UCuser9"}, "parentId": "Ugw_T2", "likeCount": 1, "publishedAt": "2026-10-03T09:07:00Z"}}
+  ]
+}

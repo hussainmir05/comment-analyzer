@@ -1,0 +1,10 @@
+{"data": {"xdt_api__v1__media__shortcode__web_info": {"items": [{
+  "code": "Chunk8-jurw", "pk": "3000000000000000001", "taken_at": 1761990000,
+  "caption": {"text": "Sunset over the bay"}, "user": {"pk": "400000001", "username": "example.photos"},
+  "like_count": 512, "comment_count": 3, "play_count": null, "view_count": 9001
+}]},
+ "xdt_api__v1__media__media_id__comments__connection": {"edges": [
+  {"node": {"pk": "17900000000000003", "text": "Replying: it's Sausalito", "created_at": 1762001000,
+            "comment_like_count": "2", "parent_comment_id": "17900000000000002",
+            "user": {"id": "300000003", "username": "someone_three"}}}
+ ]}}}

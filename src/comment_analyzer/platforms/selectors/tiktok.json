@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "capture": [
+    "^https://www\\.tiktok\\.com/api/comment/list/",
+    "^https://www\\.tiktok\\.com/api/comment/list/reply/",
+    "^https://www\\.tiktok\\.com/api/item/detail/",
+    "^document:https://www\\.tiktok\\.com/"
+  ],
+  "document_json": true,
+  "more_buttons": [
+    "^View \\d+ repl(y|ies)$",
+    "^View \\d+ more$",
+    "^View more$"
+  ],
+  "scroll": true,
+  "wall_urls": ["/login"],
+  "wall_texts": [
+    "Verify to continue",
+    "Drag the slider",
+    "Too many attempts",
+    "Maximum number of attempts reached"
+  ],
+  "max_steps": 300
+}

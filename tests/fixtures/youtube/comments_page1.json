@@ -1,0 +1,11 @@
+{
+  "kind": "youtube#commentListResponse",
+  "nextPageToken": "R2",
+  "items": [
+    {"kind": "youtube#comment", "id": "Ugw_T2.r1", "snippet": {"textDisplay": "reply 1", "authorChannelId": {"value": "UCuser4"}, "parentId": "Ugw_T2", "likeCount": 1, "publishedAt": "2026-10-03T09:01:00Z"}},
+    {"kind": "youtube#comment", "id": "Ugw_T2.r2", "snippet": {"textDisplay": "reply 2", "authorChannelId": {"value": "UCuser5"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:02:00Z"}},
+    {"kind": "youtube#comment", "id": "Ugw_T2.r3", "snippet": {"textDisplay": "reply 3", "authorChannelId": {"value": "UCuser6"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:03:00Z"}},
+    {"kind": "youtube#comment", "id": "Ugw_T2.r4", "snippet": {"textDisplay": "reply 4", "authorChannelId": {"value": "UCuser7"}, "parentId": "Ugw_T2", "likeCount": 2, "publishedAt": "2026-10-03T09:04:00Z"}},
+    {"kind": "youtube#comment", "id": "Ugw_T2.r5", "snippet": {"textDisplay": "reply 5", "authorChannelId": {"value": "UCuser8"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:05:00Z"}}
+  ]
+}

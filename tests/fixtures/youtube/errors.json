@@ -1,0 +1,69 @@
+{
+  "comments_disabled": {
+    "error": {
+      "code": 403,
+      "message": "The video identified by the <code><a href=\"/youtube/v3/docs/commentThreads/list#videoId\">videoId</a></code> parameter has disabled comments.",
+      "errors": [{"message": "The video identified by the videoId parameter has disabled comments.", "domain": "youtube.commentThread", "reason": "commentsDisabled", "location": "videoId", "locationType": "parameter"}]
+    }
+  },
+  "quota_exceeded": {
+    "error": {
+      "code": 403,
+      "message": "The request cannot be completed because you have exceeded your <a href=\"/youtube/v3/getting-started#quota\">quota</a>.",
+      "errors": [{"message": "The request cannot be completed because you have exceeded your quota.", "domain": "youtube.quota", "reason": "quotaExceeded"}]
+    }
+  },
+  "key_invalid": {
+    "error": {
+      "code": 400,
+      "message": "API key not valid. Please pass a valid API key.",
+      "errors": [{"message": "API key not valid. Please pass a valid API key.", "domain": "global", "reason": "badRequest"}],
+      "status": "INVALID_ARGUMENT",
+      "details": [{"@type": "type.googleapis.com/google.rpc.ErrorInfo", "reason": "API_KEY_INVALID", "domain": "googleapis.com", "metadata": {"service": "youtube.googleapis.com"}}]
+    }
+  },
+  "key_expired": {
+    "error": {
+      "code": 400,
+      "message": "API key expired. Please renew the API key.",
+      "errors": [{"message": "API key expired. Please renew the API key.", "domain": "global", "reason": "badRequest"}],
+      "status": "INVALID_ARGUMENT",
+      "details": [{"@type": "type.googleapis.com/google.rpc.ErrorInfo", "reason": "API_KEY_INVALID", "domain": "googleapis.com", "metadata": {"service": "youtube.googleapis.com"}}]
+    }
+  },
+  "service_disabled": {
+    "error": {
+      "code": 403,
+      "message": "YouTube Data API v3 has not been used in project 123456789 before or it is disabled.",
+      "errors": [{"message": "YouTube Data API v3 has not been used in project 123456789 before or it is disabled.", "domain": "usageLimits", "reason": "accessNotConfigured"}],
+      "status": "PERMISSION_DENIED",
+      "details": [{"@type": "type.googleapis.com/google.rpc.ErrorInfo", "reason": "SERVICE_DISABLED", "domain": "googleapis.com", "metadata": {"service": "youtube.googleapis.com", "consumer": "projects/123456789"}}]
+    }
+  },
+  "access_denied": {
+    "error": {
+      "code": 403,
+      "message": "Permission denied on the service.",
+      "errors": [{"message": "Permission denied on the service.", "domain": "global", "reason": "forbidden"}],
+      "status": "PERMISSION_DENIED",
+      "details": [
+        {"@type": "type.googleapis.com/google.rpc.ErrorInfo", "reason": "ACCESS_DENIED", "domain": "googleapis.com", "metadata": {"service": "youtube.googleapis.com"}},
+        {"@type": "type.googleapis.com/google.rpc.LocalizedMessage", "locale": "en-US", "message": "Permission denied on the service."}
+      ]
+    }
+  },
+  "video_not_found": {
+    "error": {
+      "code": 404,
+      "message": "The video identified by the <code><a href=\"/youtube/v3/docs/commentThreads/list#videoId\">videoId</a></code> parameter could not be found.",
+      "errors": [{"message": "The video identified by the videoId parameter could not be found.", "domain": "youtube.commentThread", "reason": "videoNotFound", "location": "videoId", "locationType": "parameter"}]
+    }
+  },
+  "backend_error": {
+    "error": {
+      "code": 503,
+      "message": "The service is currently unavailable.",
+      "errors": [{"message": "The service is currently unavailable.", "domain": "global", "reason": "backendError"}]
+    }
+  }
+}

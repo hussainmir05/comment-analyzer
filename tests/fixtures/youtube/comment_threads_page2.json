@@ -1,0 +1,26 @@
+{
+  "kind": "youtube#commentThreadListResponse",
+  "items": [
+    {
+      "kind": "youtube#commentThread",
+      "id": "Ugw_T3",
+      "snippet": {
+        "videoId": "vid00000001",
+        "topLevelComment": {
+          "kind": "youtube#comment",
+          "id": "Ugw_T3",
+          "snippet": {
+            "videoId": "vid00000001",
+            "textDisplay": "First!",
+            "authorDisplayName": "@made-up-user-9",
+            "likeCount": 0,
+            "publishedAt": "2026-10-01T12:01:00Z"
+          }
+        },
+        "canReply": true,
+        "totalReplyCount": 0,
+        "isPublic": true
+      }
+    }
+  ]
+}

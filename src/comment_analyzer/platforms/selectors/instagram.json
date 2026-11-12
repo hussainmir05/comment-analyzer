@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "capture": [
+    "^https://www\\.instagram\\.com/api/v1/media/\\d+/(info|comments)/",
+    "^https://www\\.instagram\\.com/api/v1/media/\\d+/comments/\\d+/child_comments/",
+    "^https://www\\.instagram\\.com/(graphql/query|api/graphql)",
+    "^document:https://www\\.instagram\\.com/"
+  ],
+  "document_json": true,
+  "more_buttons": [
+    "^Load more comments$",
+    "^View replies \\(\\d+\\)$",
+    "^View all \\d+ repl(y|ies)$",
+    "^View more replies \\(\\d+\\)$"
+  ],
+  "scroll": true,
+  "wall_urls": ["/accounts/login", "/challenge/", "/suspended/", "/accounts/suspended/"],
+  "wall_texts": [
+    "Suspicious Login Attempt",
+    "Help us confirm it's you",
+    "We suspended your account",
+    "Try again later"
+  ],
+  "max_steps": 300
+}

@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Build output (scripts\build_exe.ps1)
+build/
+dist/
+
+# Installers belong on GitHub Releases, never in the repository
+*.exe
+*.msi
+
+# App data lives in %LOCALAPPDATA%\CommentAnalyzer, never in the repository
+*.db
+*.db-wal
+*.db-shm
+debug/

@@ -1,149 +1,116 @@
 # Comment Analyzer
 
-A Windows desktop app that turns a social media link into a report. Paste a link to a **YouTube, Facebook, Instagram or TikTok** post, and the app reads the post's reactions and comments, scores how people feel, and saves a **Word report** with charts and an **Excel file** containing every comment.
+A Windows desktop app: paste a link to a **YouTube, Facebook, Instagram or TikTok** post and get an honest analysis of its comments, covering sentiment, topics and how the conversation grows over time.
 
-The whole app is one Python file: [`comment_analyzer.py`](comment_analyzer.py).
+> **Status: rewrite in progress.** This is version 2, rebuilt with PySide6. All phases are built.
+>
+> - **Tested with real data:** YouTube collection and the analysis.
+> - **Built and tested offline only:** the Facebook, Instagram and TikTok collectors, which still need a test with real accounts, and Claude mode, which was tested with a stand-in client and no paid calls.
+>
+> [`docs/PLAN.md`](docs/PLAN.md) shows what's left. The previous one-file app is in [`legacy/`](legacy/README.md). Installers are published on the [Releases](../../releases) page, never in the repository.
 
-## Features
+## What works now
 
-- **Four platforms from one box:** the app works out which site a link is from.
-- **Reaction stats:** views, likes, shares and saves. It also reads Facebook's Like / Love / Care / Haha / Wow / Sad / Angry breakdown and gives an estimated YouTube dislike count.
-- **Sentiment analysis:** each comment is scored Positive, Neutral or Negative with [VADER](https://github.com/cjhutto/vaderSentiment).
-- **Emotion detection:** comments are sorted into Agree, Disagree, Happy, Sad, Angry or Neutral using word, phrase and emoji lists. These handle negation, so "not good" is not counted as Happy.
-- **Most criticized issues:** the words and two-word phrases that come up most often in negative comments, each shown with the most-liked example comment.
-- **Charts:** reaction breakdown, comments over time, sentiment and emotion split, top complaints, and word clouds for all, positive and negative comments. The colours are safe for colour-blind readers.
-- **Plain-language summary** at the top of the report, for example: *"The overall mood of the comments is mostly positive: 62% positive, 25% neutral and 13% negative."*
-- **Korean text support:** Hangul usernames and comments display correctly in charts and word clouds.
-- **Stop at any time:** press Stop and the report is built from the comments read so far.
-- **Command-line mode** for running without the window or from a script.
+- **Analysis.** After collecting, the app reads each comment's language and mood, groups comments into topics, flags likely spam, and lists what negative comments mention most.
+  - **Sentiment:** the model is XLM-T (Cardiff NLP), a one-time 282 MB download that runs offline afterwards. Its results in languages it wasn't trained on are marked "unsure".
+  - **Topics:** comments that say much the same thing, in any language, are grouped using a multilingual sentence model (a one-time 135 MB download).
+  - **Claude mode (optional, paid):** **Ask Claude...** gets a second opinion from Claude, using your own Anthropic API key. You see the estimated cost before anything is sent.
+- **Post maker.** A 1080×1350 card and four caption wordings for a post's findings, without commenters' names.
+  - Save the kit to post it yourself.
+  - Or, with your own Meta developer app set up in Settings, publish to your Facebook Page or its Instagram account. Each post asks first, and the same caption never goes out twice.
+- **Facebook, Instagram and TikTok.** Add your accounts on the **Accounts** page and log in, in the app's own browser. Each account has its own browser profile, so several can be logged in at once.
+  - Paste a post link and click **Analyse**. The post opens in a visible window, and the app reads the comments the page loads, at human pace.
+  - It stops at login walls and checks, and hands the window to you.
+  - Daily limits per account are in Settings.
+- **Tracking.** Tick **Track this post** on any YouTube post.
+  - The app re-checks tracked posts on an interval you set, collects new comments, and charts growth.
+  - It warns you, from the tray, when comments suddenly spike or turn negative.
+- **Dashboard and exports.**
+  - Charts for one post, or a comparison of several.
+  - **Export report** writes a Word report, an Excel workbook, a CSV and chart images to `Documents\Comment Analyzer Reports`, without commenter names.
+- **YouTube collection.** Paste a video link and click **Analyse**. The app reads the comments and every reply through the official YouTube Data API.
+  - The results show coverage (comments collected out of those YouTube reports), the sort order and when they were collected.
+  - A table lets you sort and filter the comments.
+  - Stop keeps what was read.
+  - The quota the app has used today is shown on the page.
+- **Link detection.** The app recognises posts, videos, Shorts, reels and share links from all four platforms, and says why X (Twitter) links aren't supported.
+- **Settings.** Your YouTube API key is kept in Windows Credential Manager, not in a file. The previous version's plain-text key can be moved there in one click. You can set collection limits and privacy options.
+- **Local database.** It records the posts you've added.
+- **Background jobs.** They show progress and have a Stop button. Opening the app a second time just brings the first window forward.
 
-## What each platform provides
+## Getting a YouTube API key
 
-| Platform  | Data collected                                              | Login needed?                        |
-|-----------|-------------------------------------------------------------|--------------------------------------|
-| YouTube   | Views, likes, dislikes (estimate), comments and replies     | No                                   |
-| Facebook  | All 7 reaction types, shares, views, top comments           | Yes (Firefox)                        |
-| Instagram | Likes, views, comments                                      | Only for comments (Firefox)          |
-| TikTok    | Views, likes, shares, saves, comments                       | Yes (Firefox)                        |
+1. Sign in to [Google Cloud Console](https://console.cloud.google.com/), preferably with a personal Google account. School and work accounts can be blocked from YouTube services.
+2. Create a project.
+3. Go to **APIs & Services → Library → YouTube Data API v3** and click **Enable**.
+4. Go to **APIs & Services → Credentials → Create credentials → API key**. Don't tie the key to a service account. You can restrict it to YouTube Data API v3, but leave application restrictions at None.
+5. In the app, open **Settings**, paste the key and click **Save key**. The app checks it with YouTube straight away.
 
-### Why Firefox?
+The free quota is 10,000 units a day. Each request (up to 100 comments) costs 1 unit.
 
-Facebook, Instagram and TikTok only show reactions and comments to visitors who are signed in. Rather than asking for your password, the app reuses the login you already have in **Firefox**: sign in to the site in Firefox once, then tick **"Use my Firefox login"**. Chrome and Edge encrypt their logins so that other apps can't read them, which is why only Firefox is supported.
+## Run from source
 
-## Installation
+You need Windows 10 or 11, [Python 3.14](https://www.python.org/downloads/windows/) from python.org, and [uv](https://docs.astral.sh/uv/).
 
-### Option 1: Windows installer (no Python needed)
-
-Download **`Comment Analyzer Setup.exe`** from the [Releases](../../releases/latest) page and run it. No admin rights are needed. The installer adds the app to the Start menu and can put a shortcut on the desktop.
-
-### Option 2: Run from source
-
-You need Python 3.9 or newer.
-
-```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
-pip install yt-dlp pandas openpyxl python-docx requests matplotlib vaderSentiment wordcloud
-python comment_analyzer.py
+```powershell
+git clone https://github.com/hussainmir05/comment-analyzer.git
+cd comment-analyzer
+uv sync                      # creates .venv with the exact versions in uv.lock
+.venv\Scripts\Activate.ps1
+python -m comment_analyzer
 ```
 
-## Usage
+Without uv: `py -3.14 -m venv .venv`, activate it, then `pip install -e . --group dev`.
 
-### Desktop app
+## Develop
 
-1. Copy a post's link (**Share → Copy link**).
-2. Click **Paste**, then **Analyse**.
-3. When the report is ready, it opens in Word.
-
-Options:
-
-- **Comments to read:** 500, 2,000, 10,000 or All. "All" can take a long time on large YouTube videos.
-- **Use my Firefox login:** required for Facebook and TikTok, and for Instagram comments.
-- **YouTube API key** (optional): makes reading comments on large YouTube videos much faster. See [Getting a YouTube API key](#getting-a-youtube-api-key).
-
-### Command line
-
-```bash
-python comment_analyzer.py "https://www.youtube.com/watch?v=VIDEO_ID"
-python comment_analyzer.py "https://www.facebook.com/..." --firefox
-python comment_analyzer.py "<link>" --limit 500 --out "C:\Reports"
+```powershell
+pytest                 # tests (no network; a throwaway data folder)
+ruff check .           # lint
+ruff format .          # format
+mypy                   # type check
+scripts\build_exe.ps1  # one-folder build in dist\, then a smoke test of the built app
+scripts\build_exe.ps1 -Installer  # also dist\Comment-Analyzer-<version>-Setup.exe (Inno Setup 6)
 ```
 
-| Flag          | Meaning                                                              |
-|---------------|----------------------------------------------------------------------|
-| `--firefox`   | Use the Firefox login                                                |
-| `--limit N`   | Maximum number of comments to read (default 2000, `0` reads them all) |
-| `--api-key K` | YouTube Data API key (can also be set as the `YOUTUBE_API_KEY` environment variable) |
-| `--out DIR`   | Folder to save the report in (default: Documents)                    |
+If PowerShell refuses to run scripts, allow local scripts once with `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
 
-## Output
+## Command line
 
-Each run creates its own folder in `Documents\Comment Analyzer Reports\`, named like `2026-11-11 1430 YouTube - Video title`. The folder contains two files.
-
-**`Report.docx`** has these sections:
-
-1. Summary of the key findings
-2. Reactions: stats table, reaction breakdown, comments over time
-3. Comment sentiment and emotion
-4. The 10 most-liked comments
-5. Most criticized issues
-6. Word clouds
-7. How these numbers were made (method and data caveats)
-
-**`Comments.xlsx`** has three sheets:
-
-- **Summary:** the post's details and stats
-- **Comments:** every comment, with its username, time, likes, whether it is a reply, sentiment score, sentiment and emotion
-- **Criticized issues:** the top complaint terms with example comments
-
-## How it works
-
-```
-link ─► detect platform ─► fetch post + comments ─► score sentiment & emotion ─► charts ─► Word + Excel
+```powershell
+python -m comment_analyzer analyse https://youtu.be/VIDEO_ID --limit 500 --out C:\Reports
 ```
 
-- **YouTube** comments are read through the YouTube Data API v3 if you give an API key, and through [yt-dlp](https://github.com/yt-dlp/yt-dlp) otherwise. Dislikes come from the [Return YouTube Dislike](https://returnyoutubedislike.com/) API.
-- **TikTok** and **Instagram** comments come from the sites' own web APIs, using the Firefox login. Post details come from yt-dlp.
-- **Facebook** data is taken from the JSON embedded in the post page.
-- **Sentiment:** a VADER compound score of 0.05 or more counts as Positive, and -0.05 or less counts as Negative.
-- **Emotion:** each comment is matched against the word, phrase and emoji lists in `EMOTIONS`, which you can edit at the top of the script to tune the results. If a comment matches none of them, a very strong VADER score is used instead.
+It collects the video's comments, analyses them, prints the summary, and writes the Word, Excel and CSV report. It uses the app's data folder and saved API key, or the `YOUTUBE_API_KEY` environment variable. `--newest` reads newest first instead of top comments.
 
-### Getting a YouTube API key
+Facebook, Instagram and TikTok are read in the app's own logged-in browser window, so they work in the app only.
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a project.
-2. Enable **YouTube Data API v3**.
-3. Under **Credentials**, create an **API key** and paste it into the app.
+To check the sentiment model against your own labels: `python -m comment_analyzer.analysis.evaluate sample`, label the CSV, then `... evaluate score <file.csv>`. Add `--claude` to compare with Claude; it shows the cost and asks first.
 
-The free quota is 10,000 units per day, which covers roughly a million comments.
+## Where your data lives
 
-## Limitations
+- **Data folder:** everything is in `%LOCALAPPDATA%\CommentAnalyzer`:
+  - `data.db`: the database;
+  - `settings.ini`: your settings;
+  - `logs\`: log files, with keys and tokens masked;
+  - `backups\`: a copy of the database from before each upgrade;
+  - `models\`: the downloaded analysis models;
+  - `profiles\`: one browser profile per Facebook, Instagram or TikTok account, holding that account's login cookies. **Log out and delete** on the Accounts page removes it;
+  - `selectors\` (optional): your own copy of a site's selectors file, which replaces the built-in one if a site changes;
+  - `debug\`: only when debug capture is on in Settings.
+- **API keys:** they're in Windows Credential Manager (Windows Credentials → Generic Credentials → `CommentAnalyzer:youtube_api_key` and `CommentAnalyzer:anthropic_api_key`).
 
-- **English only:** sentiment and emotion scoring only understands English, so comments in other languages mostly end up Neutral.
-- **Facebook** only puts its first "most relevant" comments on the post page, so the app analyses those rather than every comment.
-- **YouTube dislikes** are an estimate. YouTube stopped showing public dislike counts in 2021.
-- **YouTube comment times are approximate** without an API key, because yt-dlp only sees times like "3 months ago".
-- **The sites change often.** If a platform stops working, update yt-dlp (`pip install -U yt-dlp`) and rebuild.
+## How each platform is handled
 
-## Building the installer
-
-```bash
-pip install pyinstaller
-# also install Inno Setup 6: https://jrsoftware.org/isdl.php
-python comment_analyzer.py --build
-```
-
-This builds the app with PyInstaller, draws the app icon, and packages everything into **`Comment Analyzer Setup.exe`** next to the script.
+- **YouTube:** the official YouTube Data API v3, with your own free API key. The app never asks for your YouTube login.
+- **Facebook, Instagram, TikTok:** no official API covers other people's posts. The app reads only what your own logged-in in-app browser loads, visibly and at human pace (a random 2–5 second pause between steps). It clicks only buttons such as "View more comments", and never likes, comments or posts.
+  - It stops at login walls and captchas and hands the browser back to you.
+  - These sites' terms restrict automated collection, so each one is opt-in, and the risk to the account you use is yours.
+- **X:** not supported. Its API charges per post read and its rules ban automating x.com.
 
 ## Privacy
 
-- Everything runs on your own computer. Comments are not sent to any server other than the platform they come from (and the Return YouTube Dislike API for dislikes).
-- Settings, including your YouTube API key, are stored in plain text at `%APPDATA%\Comment Analyzer\settings.json`.
-- The Firefox login is only read from your local browser profile and is never saved or shared.
-
-## Disclaimer
-
-This tool is for personal research and analysis. Only analyse posts you are allowed to view, and respect each platform's terms of service and the privacy of the people who commented.
-
-## Built with
-
-[yt-dlp](https://github.com/yt-dlp/yt-dlp) · [pandas](https://pandas.pydata.org/) · [VADER Sentiment](https://github.com/cjhutto/vaderSentiment) · [matplotlib](https://matplotlib.org/) · [wordcloud](https://github.com/amueller/word_cloud) · [python-docx](https://python-docx.readthedocs.io/) · [openpyxl](https://openpyxl.readthedocs.io/) · Tkinter
+- **Commenters:** names are never stored. Commenter IDs are kept only as keyed hashes.
+- **Comment text:** deleted after 30 days by default. Counts and results are kept.
+- **Exports, images and captions:** never include commenters' names or photos.
+- **Network:** nothing leaves your computer except requests to the platforms themselves. The optional Claude mode is the one exception: it sends comment text without usernames, and only after you confirm the estimated cost.

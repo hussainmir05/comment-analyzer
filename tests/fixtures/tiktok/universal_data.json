@@ -1,0 +1,7 @@
+{"__DEFAULT_SCOPE__": {"webapp.video-detail": {"itemInfo": {"itemStruct": {
+  "id": "7300000000000000001", "desc": "Weeknight pasta in 10 minutes #recipe",
+  "createTime": "1761980000",
+  "author": {"uniqueId": "example.kitchen", "nickname": "Example Kitchen"},
+  "stats": {"playCount": 120000, "diggCount": 9500, "commentCount": 340, "shareCount": 210, "collectCount": 800},
+  "statsV2": {"playCount": "120345", "diggCount": "9500", "commentCount": "341", "shareCount": "210", "collectCount": "800"}
+}}}}}

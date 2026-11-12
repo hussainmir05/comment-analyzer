@@ -1,0 +1,36 @@
+name: Release
+
+# Push a tag such as v2.0.0 to build the installer and attach it to a GitHub Release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Install uv and the locked dependencies
+        run: |
+          python -m pip install uv==0.13.1
+          uv sync --locked
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+      - name: Build, smoke-test and package
+        shell: pwsh
+        env:
+          QTWEBENGINE_CHROMIUM_FLAGS: --disable-gpu  # runners have no GPU
+        run: |
+          .venv\Scripts\Activate.ps1
+          scripts\build_exe.ps1 -Clean -Installer
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/Comment-Analyzer-*-Setup.exe
+          generate_release_notes: true

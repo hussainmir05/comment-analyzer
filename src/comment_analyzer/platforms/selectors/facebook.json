@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "capture": [
+    "^https://(www|web|m)\\.facebook\\.com/api/graphql/",
+    "^document:https://(www|web|m)\\.facebook\\.com/"
+  ],
+  "document_json": true,
+  "more_buttons": [
+    "^View more comments$",
+    "^View previous comments$",
+    "^View \\d+ more comments?$",
+    "^View all \\d+ repl(y|ies)$",
+    "^View \\d+ repl(y|ies)$",
+    "^\\d+ repl(y|ies)$",
+    "^View more replies$"
+  ],
+  "scroll": true,
+  "wall_urls": ["/login", "/checkpoint/", "/two_step_verification/", "/recover/"],
+  "wall_texts": [
+    "You must log in to continue",
+    "Log in to continue",
+    "Enter the characters you see",
+    "Confirm you're human",
+    "We suspended your account",
+    "Your account has been locked"
+  ],
+  "max_steps": 400
+}

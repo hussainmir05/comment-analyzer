@@ -1,0 +1,90 @@
+{
+  "kind": "youtube#commentThreadListResponse",
+  "nextPageToken": "PAGE2",
+  "items": [
+    {
+      "kind": "youtube#commentThread",
+      "id": "Ugw_T1",
+      "snippet": {
+        "videoId": "vid00000001",
+        "topLevelComment": {
+          "kind": "youtube#comment",
+          "id": "Ugw_T1",
+          "snippet": {
+            "videoId": "vid00000001",
+            "textDisplay": "Great video, thanks!",
+            "authorDisplayName": "@made-up-user-1",
+            "authorChannelId": {"value": "UCuser1"},
+            "likeCount": 15,
+            "publishedAt": "2026-10-02T08:00:00Z",
+            "updatedAt": "2026-10-02T08:00:00Z"
+          }
+        },
+        "canReply": true,
+        "totalReplyCount": 2,
+        "isPublic": true
+      },
+      "replies": {
+        "comments": [
+          {
+            "kind": "youtube#comment",
+            "id": "Ugw_T1.r1",
+            "snippet": {
+              "videoId": "vid00000001",
+              "textDisplay": "Agreed",
+              "authorDisplayName": "@made-up-user-2",
+              "authorChannelId": {"value": "UCuser2"},
+              "parentId": "Ugw_T1",
+              "likeCount": 3,
+              "publishedAt": "2026-10-02T09:00:00Z"
+            }
+          },
+          {
+            "kind": "youtube#comment",
+            "id": "Ugw_T1.r2",
+            "snippet": {
+              "videoId": "vid00000001",
+              "textDisplay": "Thanks!",
+              "authorDisplayName": "@made-up-user-1",
+              "authorChannelId": {"value": "UCuser1"},
+              "parentId": "Ugw_T1",
+              "likeCount": 0,
+              "publishedAt": "2026-10-02T10:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "youtube#commentThread",
+      "id": "Ugw_T2",
+      "snippet": {
+        "videoId": "vid00000001",
+        "topLevelComment": {
+          "kind": "youtube#comment",
+          "id": "Ugw_T2",
+          "snippet": {
+            "videoId": "vid00000001",
+            "textDisplay": "I disagree with the second part.",
+            "authorDisplayName": "@made-up-user-3",
+            "authorChannelId": {"value": "UCuser3"},
+            "likeCount": 4,
+            "publishedAt": "2026-10-03T08:00:00Z"
+          }
+        },
+        "canReply": true,
+        "totalReplyCount": 7,
+        "isPublic": true
+      },
+      "replies": {
+        "comments": [
+          {"kind": "youtube#comment", "id": "Ugw_T2.r1", "snippet": {"textDisplay": "reply 1", "authorChannelId": {"value": "UCuser4"}, "parentId": "Ugw_T2", "likeCount": 1, "publishedAt": "2026-10-03T09:01:00Z"}},
+          {"kind": "youtube#comment", "id": "Ugw_T2.r2", "snippet": {"textDisplay": "reply 2", "authorChannelId": {"value": "UCuser5"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:02:00Z"}},
+          {"kind": "youtube#comment", "id": "Ugw_T2.r3", "snippet": {"textDisplay": "reply 3", "authorChannelId": {"value": "UCuser6"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:03:00Z"}},
+          {"kind": "youtube#comment", "id": "Ugw_T2.r4", "snippet": {"textDisplay": "reply 4", "authorChannelId": {"value": "UCuser7"}, "parentId": "Ugw_T2", "likeCount": 2, "publishedAt": "2026-10-03T09:04:00Z"}},
+          {"kind": "youtube#comment", "id": "Ugw_T2.r5", "snippet": {"textDisplay": "reply 5", "authorChannelId": {"value": "UCuser8"}, "parentId": "Ugw_T2", "likeCount": 0, "publishedAt": "2026-10-03T09:05:00Z"}}
+        ]
+      }
+    }
+  ]
+}

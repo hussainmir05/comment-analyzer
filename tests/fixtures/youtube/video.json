@@ -1,0 +1,21 @@
+{
+  "kind": "youtube#videoListResponse",
+  "items": [
+    {
+      "kind": "youtube#video",
+      "id": "vid00000001",
+      "snippet": {
+        "publishedAt": "2026-10-01T12:00:00Z",
+        "channelId": "UCchannel0000000000000001",
+        "title": "A made-up test video",
+        "channelTitle": "Test Channel"
+      },
+      "statistics": {
+        "viewCount": "12345",
+        "likeCount": "678",
+        "favoriteCount": "0",
+        "commentCount": "12"
+      }
+    }
+  ]
+}
