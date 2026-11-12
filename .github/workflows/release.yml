@@ -1,6 +1,7 @@
 name: Release
 
 # Push a tag such as v2.0.0 to build the installer and attach it to a GitHub Release.
+# A tag with a hyphen (v2.0.0-beta.1) makes a pre-release.
 on:
   push:
     tags: ["v*"]
@@ -34,3 +35,4 @@ jobs:
         with:
           files: dist/Comment-Analyzer-*-Setup.exe
           generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}  # v2.0.0-beta.1 is a pre-release
