@@ -2,12 +2,29 @@
 
 A Windows desktop app: paste a link to a **YouTube, Facebook, Instagram or TikTok** post and get an honest analysis of its comments, covering sentiment, topics and how the conversation grows over time.
 
-> **Status: rewrite in progress.** This is version 2, rebuilt with PySide6. All phases are built.
+> **Status: beta (2.0.0-beta.1).** This is version 2, rebuilt with PySide6. All phases are built.
 >
 > - **Tested with real data:** YouTube collection and the analysis.
 > - **Built and tested offline only:** the Facebook, Instagram and TikTok collectors, which still need a test with real accounts, and Claude mode, which was tested with a stand-in client and no paid calls.
 >
 > [`docs/PLAN.md`](docs/PLAN.md) shows what's left. The previous one-file app is in [`legacy/`](legacy/README.md). Installers are published on the [Releases](../../releases) page, never in the repository.
+
+## Download and install
+
+No coding needed. You need Windows 10 or 11 (64-bit).
+
+<!-- Point this at the newest installer with each release: /releases/latest skips pre-releases. -->
+1. **Download** [Comment-Analyzer-2.0.0b1-Setup.exe](https://github.com/hussainmir05/comment-analyzer/releases/download/v2.0.0-beta.1/Comment-Analyzer-2.0.0b1-Setup.exe) (171 MB). Later versions appear on the [Releases](https://github.com/hussainmir05/comment-analyzer/releases) page, under **Assets**.
+2. **Run it.** Double-click the downloaded file. The installer isn't code-signed, so Windows may say "Windows protected your PC". Click **More info**, then **Run anyway**.
+3. **Install.** Click through the steps. It installs for your Windows account only, so it doesn't need administrator rights. Tick the box if you want a desktop shortcut.
+4. **Open it** from the Start menu: **Comment Analyzer**.
+5. **Set up a platform.**
+   - **YouTube:** paste a free YouTube API key in **Settings**. [Getting a YouTube API key](#getting-a-youtube-api-key) shows how.
+   - **Facebook, Instagram, TikTok:** no key needed. Log in to your account on the **Accounts** page.
+6. **Analyse a post.** Paste its link and click **Analyse**. The first time, the app asks to download its analysis models, about 420 MB, once. After that, analysis runs on your computer.
+
+- **Updating:** download the newer installer and run it. Your posts, settings and keys are kept.
+- **Uninstalling:** in Windows **Settings → Apps**, find **Comment Analyzer** and click **Uninstall**. It asks whether to delete your collected data too.
 
 ## What works now
 
@@ -50,6 +67,8 @@ The free quota is 10,000 units a day. Each request (up to 100 comments) costs 1 
 
 ## Run from source
 
+For developers. To just use the app, see [Download and install](#download-and-install).
+
 You need Windows 10 or 11, [Python 3.14](https://www.python.org/downloads/windows/) from python.org, and [uv](https://docs.astral.sh/uv/).
 
 ```powershell
@@ -74,6 +93,8 @@ scripts\build_exe.ps1 -Installer  # also dist\Comment-Analyzer-<version>-Setup.e
 ```
 
 If PowerShell refuses to run scripts, allow local scripts once with `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
+
+**Releasing:** set the version in `src/comment_analyzer/__init__.py`, commit, then push a tag such as `v2.0.0`. A tag with a hyphen, such as `v2.0.0-beta.2`, makes a pre-release. The Release workflow builds and smoke-tests the installer and attaches it to a GitHub Release. Then point the download link in [Download and install](#download-and-install) at the new file.
 
 ## Command line
 
